@@ -1,0 +1,2 @@
+wrong example.
+do not make sub class in this case!!
