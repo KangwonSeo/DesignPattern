@@ -5,6 +5,7 @@ using namespace std;
 struct HtmlBuilder;
 struct HtmlElement
 {
+                friend HtmlBuilder;
         string name;
         string text;
         vector<HtmlElement> elements;
@@ -37,9 +38,10 @@ struct HtmlBuilder
  
         void str() { return root.str(); }
 };
+
 int main() {
         auto builder = HtmlElement::build("ul");
-        //builder.add_child("li", "hello").add_child("li", "world");
-        //builder.str();
+        (*builder).add_child("li", "hello").add_child("li", "world");
+        (*builder).str();
         return 0;
 }
