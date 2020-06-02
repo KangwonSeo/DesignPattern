@@ -5,20 +5,21 @@
 using namespace std;
 class PersonBuilder;
 class PersonAddressBuilder;
+ 
 class Person 
 {
         string addr, code, city;
         //string company, position;
         Person() {}
-        
-        friend class PersonBuilder;
+ 
+        friend PersonBuilder;
+        friend PersonAddressBuilder;
 public:
-        static PersonBuilder create(void) {
-                PersonBuilder e = PersonBuilder();
-                return e;
+        static unique_ptr<PersonBuilder> create() {
+                return make_unique<PersonBuilder>();
         }
 };
-
+ 
 class PersonBuilderBase
 {
 protected:
@@ -29,17 +30,19 @@ public:
         {
                 return move(person);
         }
-        PersonAddressBuilder lives() const;
+        shared_ptr<PersonAddressBuilder> lives() {
+                return make_shared<PersonAddressBuilder>(person);
+        }
         //PersonJobBuilder works() const;
 };
-
+ 
 class PersonBuilder : public PersonBuilderBase
 {
         Person p;
 public:
         PersonBuilder() : PersonBuilderBase{p} {}
 };
-
+ 
 class PersonAddressBuilder : public PersonBuilderBase
 {
         typedef PersonAddressBuilder self;
@@ -59,6 +62,6 @@ public:
         }
 };
 int main() {
-        Person p = Person::create().lives().at("Road").with("128").in("LOONDON");
+        Person p = (*Person::create()).lives()->at("Road").with("128").in("LOONDON");
         return 0;
 }
