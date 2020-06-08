@@ -40,12 +40,10 @@ private:
                 return result;
         }
 };      
+Contact EmployeeFactory::main(" ", new Address("123", "London"));
+Contact EmployeeFactory::aux(" ", new Address("123", "London"));
+
 int main() {
-        EmployeeFactory::main(" ", new Address("123", "London"));
-        EmployeeFactory::aux(" ", new Address("123", "London"));
-        //Contact main(" ", new Address("123", "London"));
-        //Contact aux(" ", new Address("456", "London"));
-        
         auto john = EmployeeFactory::NewAuxOfficeEmployee("John");
         return 0;
 }
