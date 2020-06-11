@@ -27,7 +27,7 @@ struct VectorRectangle : VectorObject
         {
                 lines.emplace_back(Line{ Point{x,y}, Point{x+width,y} });
                 lines.emplace_back(Line{ Point{x+width,y}, Point{x+width,y+height} });
-                lines.emplace_back(Line{ Point{x,y}, Point{x,x,y+height} });
+                lines.emplace_back(Line{ Point{x,y}, Point{x,y+height} });
                 lines.emplace_back(Line{ Point{x,y+height}, Point{x+width,y+height} });
         }
         
@@ -51,19 +51,19 @@ struct LineToPointAdapter
                 int top= min(line.start.x, line.end.x);
                 int bottom= min(line.start.y, line.end.y);
                 int dx = right - left;
-                int dy = line.end.y - lien.start.y;
+                int dy = line.end.y - line.start.y;
                 if (dx == 0)
                 {
                         for (int y = top; y <=bottom; ++y)
                                 points.emplace_back(Point {left,y});
                 } else if (dy == 0) 
                 {
-                        for (int x = left; y <=right; ++x)
+                        for (int x = left; x <=right; ++x)
                                 points.emplace_back(Point {x,top});
                 }
         }
-        Points::iterator begin() { return points.begin(); }
-        Points::iterator begin() { return points.begin(); }
+        virtual Points::iterator begin() { return points.begin(); }
+        virtual Points::iterator end() { return points.end(); }
 private:
         Points points;
 };
