@@ -27,7 +27,7 @@ template <typename Func> auto make_logger2(Func func, const string& name)
 {
         return Logger2<Func>{ func, name };
 }
-
+// template function didn't need to declare type in call
 int main() {
         auto call = make_logger2([]() { cout << "Hello!" << endl; },
                 "HelloFunction");
