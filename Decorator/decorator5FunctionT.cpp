@@ -1,4 +1,4 @@
-nclude <iostream>
+#include <iostream>
 #include <sstream>
 #include <vector>
 #include <memory>
@@ -9,10 +9,13 @@ nclude <iostream>
 using namespace std;
 
 template <typename> struct Logger3;
+//base template
 template <typename R, typename... Args>
+//템플릿 부분 특수화, 해당 template의 경우 이 클래스.
 struct Logger3<R(Args...)>
 {
         function<R(Args ...)> func;
+        //function<return(arg)>
         string name;
         
         Logger3(function<R(Args ...)> func, const string& name)
@@ -26,10 +29,12 @@ struct Logger3<R(Args...)>
         }
 };
 template <typename R, typename... Args> 
+//가변길이 템플릿
 auto make_logger3(R (*func)(Args...), const string& name)
 {
         return Logger3<R(Args...)>( function<R(Args...)>(func), name);
 }
+
 
 double add(double a, double b)
 {
