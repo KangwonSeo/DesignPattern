@@ -65,5 +65,7 @@ map<key, string> User::names{};
 
 int main(void)
 {
+        User u("John", "smith");
+        cout << u << endl;
     return 0;
 }
