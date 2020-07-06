@@ -20,7 +20,7 @@ struct Query
 
 struct Game
 {
-        signal<void(Query&)> queries;
+        signal<void(Query&)> queries; //ret void, argument query function signal
 };
 
 class Creature
